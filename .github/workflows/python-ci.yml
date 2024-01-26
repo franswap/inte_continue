@@ -24,7 +24,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Generate Graphs
-      run: python generate_graphs.py  # Remplacez par le nom de votre script
+      run: python train.py
 
     - name: Deploy to GitHub Pages
       run: |
