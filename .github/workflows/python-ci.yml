@@ -1,13 +1,12 @@
-name: Python CI
+name: Generate and Deploy Graphs
 
 on:
   push:
     branches:
-      - main  
+      - main
 
 jobs:
-  build:
-
+  generate-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,12 +16,22 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8 
+        python-version: 3.8
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Changez ceci en fonction de votre configuration
+        pip install -r requirements.txt
 
-    - name: Run tests
-      run: python -m unittest discover 
+    - name: Generate Graphs
+      run: python generate_graphs.py  # Remplacez par le nom de votre script
+
+    - name: Deploy to GitHub Pages
+      run: |
+        mkdir -p docs
+        cp -r output/* docs/
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs
+        git commit -m "Update graphs [skip ci]"
+        git push
