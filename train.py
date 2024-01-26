@@ -81,7 +81,19 @@ plt.ylim((2.5,8.5))
 plt.xlim((2.5,8.5))
 
 plt.tight_layout()
-plt.savefig("residuals.png",dpi=120) 
+plt.savefig("docs/residuals.png",dpi=120) 
 
 plt.savefig('docs/graph.png')
+# train.py
+
+# ... Votre code existant ...
+
+# Assurez-vous que les fichiers sont générés dans le dossier docs
+output_folder = "docs"
+os.makedirs(output_folder, exist_ok=True)
+
+# ... Votre code de génération de figure ...
+
+# Sauvegarder la figure dans le dossier docs
+plt.savefig(os.path.join(output_folder, "feature_importance.png"))
 
