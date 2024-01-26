@@ -81,25 +81,5 @@ plt.ylim((2.5,8.5))
 plt.xlim((2.5,8.5))
 
 plt.tight_layout()
-plt.savefig("docs/residuals.png",dpi=120) 
-
-# train.py
-
-# Importer le module os
-import os
-
-# ... Votre code existant ...
-
-# Assurez-vous que les fichiers sont générés dans le dossier docs
-output_folder = "docs"
-os.makedirs(output_folder, exist_ok=True)
-
-# Exemple de sauvegarde d'une figure avec matplotlib
-import matplotlib.pyplot as plt
-
-# ... Votre code de génération de figure ...
-
-# Sauvegarder la figure dans le dossier docs
-plt.savefig(os.path.join(output_folder, "feature_importance.png"))
-
+plt.savefig("residuals.png",dpi=120) 
 
