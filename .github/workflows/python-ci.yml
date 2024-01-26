@@ -26,12 +26,16 @@ jobs:
     - name: Generate Graphs
       run: python train.py
 
-    - name: Deploy to GitHub Pages
+    - name: Prepare Deploy
       run: |
         mkdir -p docs
         cp -r output/* docs/
         git config --local user.email "fplaniol@outlook.fr"
         git config --local user.name "franswap"
-        git add docs
-        git commit -m "Update graphs [skip ci]"
-        git push
+        git add docs feature_importance.png metrics.txt residuals.png
+        git diff --quiet && git diff --staged --quiet || git commit -m "Update graphs [skip ci]"
+      continue-on-error: true
+
+    - name: Deploy to GitHub Pages
+      run: git push
+      if: github.event_name == 'push' && github.event_name != 'pull_request'
