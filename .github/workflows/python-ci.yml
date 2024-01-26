@@ -26,6 +26,14 @@ jobs:
     - name: Generate Graphs
       run: python train.py
 
+    - name: Archive plots
+      uses: actions/upload-artifact@v2
+      with:
+        name: plots
+        path: |
+          feature_importance.png
+          residuals.png
+
     - name: Prepare Deploy
       run: |
         mkdir -p docs
@@ -35,9 +43,3 @@ jobs:
         git add docs feature_importance.png metrics.txt residuals.png
         git diff --quiet && git diff --staged --quiet || git commit -m "Update graphs [skip ci]"
       continue-on-error: true
-
-    - name: Deploy to GitHub Pages
-      run: git push origin $GITHUB_REF:main
-      if: github.event_name == 'push' && github.event_name != 'pull_request'
-      env:
-        GH_TOKEN: ${{ secrets.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 }}
