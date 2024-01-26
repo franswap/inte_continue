@@ -37,7 +37,7 @@ jobs:
       continue-on-error: true
 
     - name: Deploy to GitHub Pages
-      run: git push https://$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@github.com/$GITHUB_REPOSITORY.git HEAD:main
+      run: git push https://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@github.com/$GITHUB_REPOSITORY.git HEAD:main
       if: github.event_name == 'push' && github.event_name != 'pull_request'
       env:
         GH_TOKEN: ${{ secrets.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 }}
